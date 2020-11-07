@@ -3,19 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <title>My CRUD in NodeJS</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 </head>
 <body>
-
-<h2>Editar Registro</h2>
+  <header class="container Header">
+    <br/>  
+    <h1 class="text-center">Edição de Usuário</h2>
+    <br/>
+  </header>
+<div class="container">
   <% data.forEach(function(details) { %>
     <form action="/edit/<%= details._id %>" method="POST">
-      <input type="text" value="<%= details.name %>" name="name">
-      <input type="text" value="<%= details.surname %>" name="surname">
-      <br />
-      <button><a href="/show">Todos</a></button>
-      <button type="submit">Editar</button>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" name="email" id="email" value="<%= details.email%>">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="senha">Senha</label>
+          <input type="password" class="form-control" name="senha" id="senha">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="endereco">Endereço</label>
+        <input type="text" class="form-control" name="endereco" id="endereco" placeholder="1234 Rua da Graça" value="<%= details.endereco %>">
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="cidade">Cidade</label>
+          <input type="text" class="form-control" id="cidade" name="cidade" value="<%= details.cidade %>">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="estado">Estado</label>
+          <select  id="estado" name="estado" class="form-control">
+            <option>Escolha...</option>
+            <option <%= details.estado ==='Bahia' ? "selected" : "" %>>Bahia</option>
+            <option <%= details.estado ==='Sergipe' ? "selected" : "" %>>Sergipe</option>
+            <option <%= details.estado ==='Alagoas' ? "selected" : "" %>>Alagoas</option>
+            <option <%= details.estado ==='Rio Grande do Norte' ? "selected" : "" %>>Rio Grande do Norte</option>
+          </select>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="cep">Cep</label>
+          <input type="text" class="form-control" id="cep" name="cep" value="<%= details.cep %>">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="check" name="check" <%= details.check ==='on' ? "checked" : "" %>>
+          <label class="form-check-label" for="check">
+            Confirmo os dados informados acima
+          </label>
+        </div>
+      </div>
+
+      <button class="btn btn-dark" onclick="window.location.href = '/show'">Todos</button>
+      <button class="btn btn-dark" type="submit">Editar</button>
     </form>
   <% }) %>
-
+</div>
 </body>
 </html>
