@@ -49,7 +49,6 @@ app.post('/show', (req, res)=>{
 app.route('/edit/:id')
 .get((req, res) => {
   var id = req.params.id
-
   db.collection('data').find(ObjectId(id)).toArray((err, result) => {
     if (err) return res.send(err)
     res.render('edit', { data: result })
@@ -57,13 +56,23 @@ app.route('/edit/:id')
 })
 .post((req, res) => {
   var id = req.params.id
-  var name = req.body.name
-  var surname = req.body.surname
-
+  var email = req.body.email
+  var senha = req.body.senha
+  var endereco = req.body.endereco
+  var cidade = req.body.cidade
+  var estado = req.body.estado
+  var cep = req.body.cep
+  var check = req.body.check
+  
   db.collection('data').updateOne({_id: ObjectId(id)}, {
     $set: {
-      name: name,
-      surname: surname
+      email: email,
+      senha: senha,
+      endereco: endereco,
+      cidade: cidade,
+      estado: estado,
+      cep: cep,
+      check: check,
     }
   }, (err, result) => {
     if (err) return res.send(err)
